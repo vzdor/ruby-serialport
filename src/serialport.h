@@ -47,14 +47,14 @@ struct line_signals
 #define HARD   1
 #define SOFT   2
 
-#if defined(OS_MSWIN) || defined(OS_BCCWIN)
+#if defined(OS_MSWIN) || defined(OS_BCCWIN) || defined(OS_MINGW)
    #define SPACE  SPACEPARITY
    #define MARK   MARKPARITY
    #define EVEN   EVENPARITY
    #define ODD    ODDPARITY
    
    #ifndef RB_SERIAL_EXPORT
-   #define RB_SERIAL_EXPORT __declspec(dllexport)
+	 #define RB_SERIAL_EXPORT __declspec(dllexport)
    #endif
 #else
    #define SPACE  0

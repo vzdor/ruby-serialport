@@ -19,7 +19,7 @@
 #include "serialport.h"
 
 /* Check if we are on a posix compliant system. */
-#if !defined(OS_MSWIN) && !defined(OS_BCCWIN)
+#if !defined(OS_MSWIN) && !defined(OS_BCCWIN) && !defined(OS_MINGW)
 
 #include <stdio.h>   /* Standard input/output definitions */
 #include <unistd.h>  /* UNIX standard function definitions */
@@ -664,4 +664,4 @@ VALUE sp_get_dtr_impl(self)
    return INT2FIX(ls.dtr);
 }
 
-#endif /* !defined(OS_MSWIN) || !defined(OS_BCCWIN) */
+#endif /* !defined(OS_MSWIN) && !defined(OS_BCCWIN) && !defined(OS_MINGW) */

@@ -18,7 +18,7 @@
 
 #include "serialport.h"
 
-#if defined(OS_MSWIN) || defined(OS_BCCWIN)
+#if defined(OS_MSWIN) || defined(OS_BCCWIN) || defined(OS_MINGW)
 
 #include <stdio.h>   /* Standard input/output definitions */
 #include <io.h>      /* Low-level I/O definitions */
@@ -609,4 +609,4 @@ VALUE RB_SERIAL_EXPORT sp_get_dtr_impl(self)
    return self;
 }
 
-#endif /* defined(OS_MSWIN) || defined(OS_BCCWIN) */
+#endif /* defined(OS_MSWIN) || defined(OS_BCCWIN) || defined(OS_MINGW) */

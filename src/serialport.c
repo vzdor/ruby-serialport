@@ -323,7 +323,7 @@ static VALUE sp_signals(self)
 
    hash = rb_hash_new();
 
-#if !(defined(OS_MSWIN) || defined(OS_BCCWIN))
+#if !(defined(OS_MSWIN) || defined(OS_BCCWIN) || defined(OS_MINGW))
    rb_hash_aset(hash, sRts, INT2FIX(ls.rts));
    rb_hash_aset(hash, sDtr, INT2FIX(ls.dtr));
 #endif
