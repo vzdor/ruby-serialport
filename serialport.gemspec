@@ -15,10 +15,10 @@ SPEC = Gem::Specification.new do |s|
               'src/win_serialport_impl.c' ]
   s.test_files = [ 'test/miniterm.rb' ]
   s.extensions << 'extconf.rb'
-  s.has_rdoc = true
-  s.extra_rdoc_files = [ 'README', 'src/serialport.c', 'src/serialport.h' ]
-  s.rdoc_options = [ '--main', 'README' ]
+  s.has_rdoc = false
+  #s.extra_rdoc_files = [ 'README', 'src/serialport.c', 'src/serialport.h' ]
+  #s.rdoc_options = [ '--main', 'README' ]
   s.authors = ['Guillaume Pierronnet', 'Alan Stern', 'Daniel E. Shipton', 'Tobin Richard']
-  s.email = 'tobin.richard@gmail.com'
-  s.homepage = 'http://github.com/toholio/ruby-serialport/'
+  s.email = 'hector@hectorparra.com'
+  s.homepage = 'http://github.com/hparra/ruby-serialport/'
 end
