@@ -20,10 +20,10 @@
 #ifndef _RUBY_SERIAL_PORT_H_
 #define _RUBY_SERIAL_PORT_H_
 
-#define RUBY_SERIAL_PORT_VERSION   "0.7.2"
+#define RUBY_SERIAL_PORT_VERSION   "0.7.3"
 
 #include <ruby.h>    /* ruby inclusion */
-#include <rubyio.h>  /* ruby io inclusion */
+#include <ruby/io.h>  /* ruby io inclusion */
 
 struct modem_params
 {

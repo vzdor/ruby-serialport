@@ -43,16 +43,16 @@ static char sIoctl[] = "ioctl";
 int get_fd_helper(obj)
    VALUE obj;
 {
-   OpenFile *fptr;
+   rb_io_t *fptr;
 
    GetOpenFile(obj, fptr);
-   return (fileno(fptr->f));
+   return (fptr->fd);
 }
 
 VALUE sp_create_impl(class, _port)
    VALUE class, _port;
 {
-   OpenFile *fp;
+   rb_io_t *fp;
    int fd;
    int num_port;
    char *port;
@@ -94,7 +94,7 @@ VALUE sp_create_impl(class, _port)
 
       case T_STRING:
          Check_SafeStr(_port);
-         port = RSTRING(_port)->ptr;
+         port = RSTRING_PTR(_port);
          break;
 
       default:
@@ -135,7 +135,7 @@ VALUE sp_create_impl(class, _port)
       rb_sys_fail(sTcsetattr);
    }
 
-   fp->f = rb_fdopen(fd, "r+");
+   fp->fd = fd;
    fp->mode = FMODE_READWRITE | FMODE_SYNC;
 
    return (VALUE) sp;
