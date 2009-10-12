@@ -23,7 +23,12 @@
 #define RUBY_SERIAL_PORT_VERSION   "0.7.3"
 
 #include <ruby.h>    /* ruby inclusion */
-#include <ruby/io.h>  /* ruby io inclusion */
+
+#if RUBY_VERSION < '1.9.0' /* ruby io inclusion */
+	#include <ruby/io.h>
+#else
+	#include <rubyio.h>
+#endif
 
 struct modem_params
 {
