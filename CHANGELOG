@@ -1,3 +1,6 @@
+0.7.3 => 10/09/2009     http://makrotopia.org/browser/makrosys/makrobe/ruby-serialport/patches/10-fix-for-ruby-1.9 
+                        applied for 1.9 support (POSIX only)
+
 0.7.2 => 02/09/2008:    Fix several Windows and POSIX compilation problems.
                         Make GCC compile the code without any warnings.
                         Make RDoc not be so talkative during gem installation.
