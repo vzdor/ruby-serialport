@@ -43,13 +43,13 @@ static char sIoctl[] = "ioctl";
 int get_fd_helper(obj)
    VALUE obj;
 {
-#if RUBY_VERSION < '1.9.0'
+#if RUBY_VERSION >= '1.9.0'
 	rb_io_t *fptr;
 #else
 	OpenFile *fptr;
 #endif
    GetOpenFile(obj, fptr);
-#if RUBY_VERSION < '1.9.0'
+#if RUBY_VERSION >= '1.9.0'
 	return (fptr->fd);
 #else
 	return (fileno(fptr->f));
@@ -59,7 +59,7 @@ int get_fd_helper(obj)
 VALUE sp_create_impl(class, _port)
    VALUE class, _port;
 {
-#if RUBY_VERSION < '1.9.0'
+#if RUBY_VERSION >= '1.9.0'
 	rb_io_t *fp;
 #else
 	OpenFile *fp;
@@ -106,7 +106,7 @@ VALUE sp_create_impl(class, _port)
 
       case T_STRING:
          Check_SafeStr(_port);
-#if RUBY_VERSION < '1.9.0'
+#if RUBY_VERSION >= '1.9.0'
 			port = RSTRING_PTR(_port);
 #else
 			port = RSTRING(_port)->ptr;
@@ -151,7 +151,7 @@ VALUE sp_create_impl(class, _port)
       rb_sys_fail(sTcsetattr);
    }
 
-#if RUBY_VERSION < '1.9.0'
+#if RUBY_VERSION >= '1.9.0'
 	fp->fd = fd;
 #else
 	fp->f = rb_fdopen(fd, "r+");

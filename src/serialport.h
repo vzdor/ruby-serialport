@@ -24,7 +24,7 @@
 
 #include <ruby.h>    /* ruby inclusion */
 
-#if RUBY_VERSION < '1.9.0' /* ruby io inclusion */
+#if RUBY_VERSION >= '1.9.0'
 	#include <ruby/io.h>
 #else
 	#include <rubyio.h>
