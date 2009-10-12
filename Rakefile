@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "ruby-serialport"
+    gemspec.name = "serialport"
     gemspec.summary = "Library for using RS-232 serial ports."
     gemspec.description = "Ruby/SerialPort is a Ruby library that provides a class for using RS-232 serial ports."
     gemspec.email = "hector@hectorparra.com"
