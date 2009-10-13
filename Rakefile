@@ -11,6 +11,7 @@ begin
     gemspec.homepage = 'http://github.com/hparra/ruby-serialport/'
     gemspec.authors = ['Guillaume Pierronnet', 'Alan Stern', 'Daniel E. Shipton', 'Tobin Richard']
     gemspec.has_rdoc = false
+    gemspec.extensions << 'extconf.rb'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
