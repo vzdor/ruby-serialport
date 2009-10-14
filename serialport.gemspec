@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{serialport}
-  s.version = "0.7.4"
+  s.version = "0.8.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Guillaume Pierronnet", "Alan Stern", "Daniel E. Shipton", "Tobin Richard"]
-  s.date = %q{2009-10-13}
+  s.date = %q{2009-10-14}
   s.description = %q{Ruby/SerialPort is a Ruby library that provides a class for using RS-232 serial ports.}
   s.email = %q{hector@hectorparra.com}
   s.extensions = ["extconf.rb"]
