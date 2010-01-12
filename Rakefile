@@ -17,3 +17,8 @@ begin
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler -s http://gemcutter.org"
 end
+
+task :clean do
+  rm_rf(Dir['doc'], :verbose => true)
+  rm_rf(Dir['pkg'], :verbose => true)
+end
