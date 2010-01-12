@@ -35,16 +35,28 @@ static char sSetCommTimeouts[] = "SetCommTimeouts";
 static HANDLE get_handle_helper(obj)
    VALUE obj;
 {
+#ifdef RUBY_19
+   rb_io_t *fptr;
+#else
    OpenFile *fptr;
+#endif
 
    GetOpenFile(obj, fptr);
+#ifdef RUBY_19
+   return (HANDLE) _get_osfhandle(fptr->fd);
+#else
    return (HANDLE) _get_osfhandle(fileno(fptr->f));
+#endif
 }
 
 VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
    VALUE class, _port;
 {
+#ifdef RUBY_19
+   rb_io_t *fp;
+#else
    OpenFile *fp;
+#endif
    int fd;
    HANDLE fh;
    int num_port;
@@ -75,7 +87,11 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
 
       case T_STRING:
          Check_SafeStr(_port);
+#ifdef RUBY_19
+         port = RSTRING_PTR(_port);
+#else
          port = RSTRING(_port)->ptr;
+#endif
          break;
 
       default:
@@ -121,7 +137,11 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
 
    errno = 0;
    fp->mode = FMODE_READWRITE | FMODE_BINMODE | FMODE_SYNC;
+#ifdef RUBY_19
+   fp->fd = fdopen(fd, "rb+");
+#else
    fp->f = fdopen(fd, "rb+");
+#endif
    return (VALUE) sp;
 }
 
