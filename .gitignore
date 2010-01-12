@@ -1,6 +1,6 @@
 /pkg
 /doc
- 
+
 /ext/native/*.bundle
 /ext/native/*.log
 /ext/native/*.o
