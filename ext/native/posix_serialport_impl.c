@@ -2,6 +2,7 @@
  * Guillaume Pierronnet <moumar@netcourrier.com>
  * Alan Stern <stern@rowland.harvard.edu>
  * Daniel E. Shipton <dshipton@redshiptechnologies.com>
+ * Ryan C. Payne <rpayne-oss@bullittsystems.com>
  *
  * This code is hereby licensed for public consumption under either the
  * GNU GPL v2 or greater.
@@ -43,13 +44,13 @@ static char sIoctl[] = "ioctl";
 int get_fd_helper(obj)
    VALUE obj;
 {
-#ifdef RUBY_19
+#ifdef RUBY_1_9
    rb_io_t *fptr;
 #else
    OpenFile *fptr;
 #endif
    GetOpenFile(obj, fptr);
-#ifdef RUBY_19
+#ifdef RUBY_1_9
    return (fptr->fd);
 #else
    return (fileno(fptr->f));
@@ -59,7 +60,7 @@ int get_fd_helper(obj)
 VALUE sp_create_impl(class, _port)
    VALUE class, _port;
 {
-#ifdef RUBY_19
+#ifdef RUBY_1_9
    rb_io_t *fp;
 #else
    OpenFile *fp;
@@ -72,8 +73,8 @@ VALUE sp_create_impl(class, _port)
 #if defined(OS_LINUX) || defined(OS_CYGWIN)
       "/dev/ttyS0", "/dev/ttyS1", "/dev/ttyS2", "/dev/ttyS3",
       "/dev/ttyS4", "/dev/ttyS5", "/dev/ttyS6", "/dev/ttyS7"
-#elif defined(OS_FREEBSD) || defined(OS_NETBSD) || defined(OS_OPENBSD)
-         "/dev/cuaa0", "/dev/cuaa1", "/dev/cuaa2", "/dev/cuaa3",
+#elif defined(OS_FREEBSD) || defined(OS_NETBSD) || defined(OS_OPENBSD) || defined(OS_DARWIN)
+      "/dev/cuaa0", "/dev/cuaa1", "/dev/cuaa2", "/dev/cuaa3",
       "/dev/cuaa4", "/dev/cuaa5", "/dev/cuaa6", "/dev/cuaa7"
 #elif defined(OS_SOLARIS)
          "/dev/ttya", "/dev/ttyb", "/dev/ttyc", "/dev/ttyd",
@@ -106,7 +107,7 @@ VALUE sp_create_impl(class, _port)
 
       case T_STRING:
          Check_SafeStr(_port);
-#ifdef RUBY_19
+#ifdef RUBY_1_9
          port = RSTRING_PTR(_port);
 #else
          port = RSTRING(_port)->ptr;
@@ -151,7 +152,7 @@ VALUE sp_create_impl(class, _port)
       rb_sys_fail(sTcsetattr);
    }
 
-#ifdef RUBY_19
+#ifdef RUBY_1_9
    fp->fd = fd;
 #else
    fp->f = rb_fdopen(fd, "r+");

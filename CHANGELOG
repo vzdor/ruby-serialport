@@ -1,4 +1,6 @@
-0.7.4 => 10/12/2009:	Conditional 1.8.6 & 1.9 support (POSIX only). MinGW support.
+0.9.0 => 01/12/2010:    Fixed x86_64 segmentation fault issues.
+
+0.7.4 => 10/12/2009:    Conditional 1.8.6 & 1.9 support (POSIX only). MinGW support.
 
 0.7.3 => 10/09/2009:    http://makrotopia.org/browser/makrosys/makrobe/ruby-serialport/patches/10-fix-for-ruby-1.9 
                         applied for 1.9 support (POSIX only)

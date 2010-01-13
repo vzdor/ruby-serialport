@@ -3,6 +3,7 @@
  * Alan Stern <stern@rowland.harvard.edu>
  * Daniel E. Shipton <dshipton@redshiptechnologies.com>
  * Tobin Richard <tobin.richard@gmail.com>
+ * Ryan C. Payne <rpayne-oss@bullittsystems.com>
  *
  * This code is hereby licensed for public consumption under either the
  * GNU GPL v2 or greater.
@@ -20,14 +21,13 @@
 #ifndef _RUBY_SERIAL_PORT_H_
 #define _RUBY_SERIAL_PORT_H_
 
-#define RUBY_SERIAL_PORT_VERSION   "0.7.3"
+#define RUBY_SERIAL_PORT_VERSION   "0.9.0"
 
 #include <ruby.h>    /* ruby inclusion */
-
-#ifdef RUBY_19
-	#include <ruby/io.h>
+#ifdef RUBY_1_9      /* ruby io inclusion */
+   #include <ruby/io.h>
 #else
-	#include <rubyio.h>
+   #include <rubyio.h>
 #endif
 
 struct modem_params
@@ -59,7 +59,7 @@ struct line_signals
    #define ODD    ODDPARITY
    
    #ifndef RB_SERIAL_EXPORT
-	 #define RB_SERIAL_EXPORT __declspec(dllexport)
+   #define RB_SERIAL_EXPORT __declspec(dllexport)
    #endif
 #else
    #define SPACE  0
