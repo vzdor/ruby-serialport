@@ -1,4 +1,4 @@
-0.9.0 => 01/12/2010:    Fixed x86_64 segmentation fault issues.
+1.0.0 => 01/12/2010:    Fixed x86_64 segmentation fault issues. Windows 1.9 support.
 
 0.7.4 => 10/12/2009:    Conditional 1.8.6 & 1.9 support (POSIX only). MinGW support.
 
