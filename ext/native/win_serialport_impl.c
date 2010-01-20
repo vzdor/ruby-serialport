@@ -138,7 +138,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
    errno = 0;
    fp->mode = FMODE_READWRITE | FMODE_BINMODE | FMODE_SYNC;
 #ifdef RUBY_1_9
-   fp->fd = fdopen(fd, "rb+");
+   fp->fd = fd;
 #else
    fp->f = fdopen(fd, "rb+");
 #endif

@@ -57,10 +57,13 @@ struct line_signals
    #define MARK   MARKPARITY
    #define EVEN   EVENPARITY
    #define ODD    ODDPARITY
-   
+
+/* Not entirely sure why this was commented out, but it has been tested */   
+/*
    #ifndef RB_SERIAL_EXPORT
    #define RB_SERIAL_EXPORT __declspec(dllexport)
    #endif
+*/
 #else
    #define SPACE  0
    #define MARK   0
