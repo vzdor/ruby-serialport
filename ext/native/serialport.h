@@ -21,7 +21,7 @@
 #ifndef _RUBY_SERIAL_PORT_H_
 #define _RUBY_SERIAL_PORT_H_
 
-#define RUBY_SERIAL_PORT_VERSION   "1.0.0"
+#define RUBY_SERIAL_PORT_VERSION   "1.0.1"
 
 #include <ruby.h>    /* ruby inclusion */
 #ifdef RUBY_1_9      /* ruby io inclusion */
