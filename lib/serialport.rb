@@ -30,17 +30,17 @@ class SerialPort
       sp = create(port)
       begin
          sp.set_modem_params(*params)
-         if (block_given?)
-            begin
-               yield sp
-            ensure             
-               sp.close
-            end
-            return nil
-         end
       rescue
          sp.close
          raise
+      end
+      if (block_given?)
+        begin
+           yield sp
+        ensure             
+           sp.close
+        end
+        return nil
       end
       return sp
    end
