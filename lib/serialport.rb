@@ -31,8 +31,11 @@ class SerialPort
       begin
          sp.set_modem_params(*params)
          if (block_given?)
-            yield sp
-            sp.close
+            begin
+               yield sp
+            ensure             
+               sp.close
+            end
             return nil
          end
       rescue
