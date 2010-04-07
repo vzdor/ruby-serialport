@@ -60,12 +60,8 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
    int fd;
    HANDLE fh;
    int num_port;
+   char *str_port;
    char *port;
-   char *ports[] = {
-      "COM1", "COM2", "COM3", "COM4",
-      "COM5", "COM6", "COM7", "COM8"
-   };
-   //int new_fd;
 
    DCB dcb;
 
@@ -76,22 +72,30 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
 
    switch(TYPE(_port))
    {
-      case T_FIXNUM:
+      case T_FIXNUM: /* Passed in a number, e.g. 7 */
          num_port = FIX2INT(_port);
-         if (num_port < 0 || num_port > sizeof(ports) / sizeof(ports[0]))
+         if (num_port < 0)
          {
             rb_raise(rb_eArgError, "illegal port number");
          }
-         port = ports[num_port];
+		 sprintf(port, "\\\\.\\COM%d", num_port)
          break;
 
-      case T_STRING:
+      case T_STRING: /* Passed in a string, e.g. "COM7" */
          Check_SafeStr(_port);
 #ifdef RUBY_1_9
-         port = RSTRING_PTR(_port);
+         str_port = RSTRING_PTR(_port);
 #else
-         port = RSTRING(_port)->ptr;
+         str_port = RSTRING(_port)->ptr;
 #endif
+		 if (str_port[0] != '\\') /* HACK: Allows for passing either "COM7" or "\\\\.\\COM7" */
+		 {
+			sprintf(port, "\\\\.\\%s", str_port);
+		 }
+		 else
+		 {
+			sprintf(port, "%s", str_port); /* safer than port = str_port */
+	 	 }
          break;
 
       default:
