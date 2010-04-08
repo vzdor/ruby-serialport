@@ -2,6 +2,7 @@
  * Guillaume Pierronnet <moumar@netcourrier.com>
  * Alan Stern <stern@rowland.harvard.edu>
  * Daniel E. Shipton <dshipton@redshiptechnologies.com>
+ * Hector G. Parra <hector@hectorparra.com>
  *
  * This code is hereby licensed for public consumption under either the
  * GNU GPL v2 or greater.
@@ -61,7 +62,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
    HANDLE fh;
    int num_port;
    char *str_port;
-   char *port;
+   char port[260]; /* Windows XP MAX_PATH. See http://msdn.microsoft.com/en-us/library/aa365247(VS.85).aspx */
 
    DCB dcb;
 
@@ -72,29 +73,29 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
 
    switch(TYPE(_port))
    {
-      case T_FIXNUM: /* Passed in a number, e.g. 7 */
+      case T_FIXNUM:
          num_port = FIX2INT(_port);
          if (num_port < 0)
          {
             rb_raise(rb_eArgError, "illegal port number");
          }
-		 sprintf(port, "\\\\.\\COM%d", num_port)
+		 sprintf(port, "\\\\.\\COM%d", num_port + 1) /* '0' is actually COM1, etc. */
          break;
 
-      case T_STRING: /* Passed in a string, e.g. "COM7" */
+      case T_STRING:
          Check_SafeStr(_port);
 #ifdef RUBY_1_9
          str_port = RSTRING_PTR(_port);
 #else
          str_port = RSTRING(_port)->ptr;
 #endif
-		 if (str_port[0] != '\\') /* HACK: Allows for passing either "COM7" or "\\\\.\\COM7" */
+		 if (str_port[0] != '\\') /* Check for Win32 Device Namespace prefix "\\.\" */
 		 {
 			sprintf(port, "\\\\.\\%s", str_port);
 		 }
 		 else
 		 {
-			sprintf(port, "%s", str_port); /* safer than port = str_port */
+			sprintf(port, "%s", str_port);
 	 	 }
          break;
 
@@ -103,13 +104,13 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
          break;
    }
 
-   printf("SerialPort => %s\n", port);
    fd = open(port, O_BINARY | O_RDWR);
-   printf("        fd => %i\n", fd);
    if (fd == -1)
+   {
       rb_sys_fail(port);
+   }
+
    fh = (HANDLE) _get_osfhandle(fd);
-   printf("        fh => %i\n", fh);
    if (SetupComm(fh, 1024, 1024) == 0)
    {
       close(fd);

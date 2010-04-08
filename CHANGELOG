@@ -1,8 +1,10 @@
+1.0.3 => 04/08/2010:	[FIXED] Could not specify 10 or "COM10" or higher under Windows
+
 1.0.2 => 04/06/2010:	[FIXED] Passing a block into open did not properly handle a return from within the block
 
-1.0.1 => 01/20/2010:   	[FIXED] Conditional RB_SERIAL_EXPORT (Visual Studio)
+1.0.1 => 01/20/2010:   	[FIXED] Conditional RB_SERIAL_EXPORT needed for Visual Studio bonked GCC
 
-1.0.0 => 01/12/2010:    [FIXED] x86_64 segmentation fault
+1.0.0 => 01/12/2010:    [FIXED] x86_64 segmentation faults
 						[NEW] Windows Ruby 1.9 support
 
 0.7.4 => 10/12/2009:    [NEW] Conditional 1.8.6 & 1.9 support (POSIX only).
