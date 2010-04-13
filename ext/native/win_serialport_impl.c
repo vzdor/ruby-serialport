@@ -79,7 +79,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
          {
             rb_raise(rb_eArgError, "illegal port number");
          }
-		 sprintf(port, "\\\\.\\COM%d", num_port + 1) /* '0' is actually COM1, etc. */
+		 sprintf(port, "\\\\.\\COM%d", num_port + 1); /* '0' is actually COM1, etc. */
          break;
 
       case T_STRING:
@@ -562,7 +562,7 @@ void RB_SERIAL_EXPORT get_line_signals_helper_impl(obj, ls)
    struct line_signals *ls;
 {
    HANDLE fh;
-   int status;
+   unsigned long status; /* DWORD */
 
    fh = get_handle_helper(obj);
    if (GetCommModemStatus(fh, &status) == 0)
