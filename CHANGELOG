@@ -1,4 +1,5 @@
-1.0.3 => 04/08/2010:	[FIXED] Could not specify 10 or "COM10" or higher under Windows
+1.0.3 => 04/08/2010:	[FIXED] [Windows] Could not specify 10 or "COM10" or higher 
+						[FIXED] [Windows] Warning passing INT instead of LONG to GetCommModemStatus
 
 1.0.2 => 04/06/2010:	[FIXED] Passing a block into open did not properly handle a return from within the block
 
