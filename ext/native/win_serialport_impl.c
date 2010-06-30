@@ -193,30 +193,7 @@ VALUE RB_SERIAL_EXPORT sp_set_modem_params_impl(argc, argv, self)
    Check_Type(_data_rate, T_FIXNUM);
 
    data_rate = FIX2INT(_data_rate);
-   switch (data_rate)
-   {
-      case 110:
-      case 300:
-      case 600:
-      case 1200:
-      case 2400:
-      case 4800:
-      case 9600:
-      case 14400:
-      case 19200:
-      case 38400:
-      case 56000:
-      case 57600:
-      case 115200:
-      case 128000:
-      case 256000:
-         dcb.BaudRate = data_rate;
-         break;
-
-      default:
-         rb_raise(rb_eArgError, "unknown baud rate");
-         break;
-   }
+   dcb.BaudRate = data_rate;
 
    SkipDataRate:
 
