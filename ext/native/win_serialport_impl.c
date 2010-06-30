@@ -79,7 +79,9 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
          {
             rb_raise(rb_eArgError, "illegal port number");
          }
-		 sprintf(port, "\\\\.\\COM%d", num_port + 1); /* '0' is actually COM1, etc. */
+		 snprintf(port, sizeof(port) - 1, "\\\\.\\COM%d", num_port + 1); /* '0' is actually COM1, etc. */
+                 port[sizeof(port) - 1] = 0;
+
          break;
 
       case T_STRING:
@@ -91,11 +93,13 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
 #endif
 		 if (str_port[0] != '\\') /* Check for Win32 Device Namespace prefix "\\.\" */
 		 {
-			sprintf(port, "\\\\.\\%s", str_port);
+			snprintf(port, sizeof(port) - 1, "\\\\.\\%s", str_port);
+                        port[sizeof(port) - 1] = 0;
 		 }
 		 else
 		 {
-			sprintf(port, "%s", str_port);
+			snprintf(port, sizeof(port) - 1, "%s", str_port);
+                        port[sizeof(port) - 1] = 0;
 	 	 }
          break;
 
