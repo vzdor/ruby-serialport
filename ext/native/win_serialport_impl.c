@@ -50,6 +50,15 @@ static HANDLE get_handle_helper(obj)
 #endif
 }
 
+/* hack to work around the fact that Ruby doesn't use GetLastError? */
+static void _rb_win32_fail(const char *function_call) {
+  rb_raise(
+    rb_eRuntimeError, 
+    "%s failed: GetLastError returns %d", 
+    function_call, GetLastError( )
+  );
+}
+
 VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
    VALUE class, _port;
 {
@@ -125,7 +134,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
    if (GetCommState(fh, &dcb) == 0)
    {
       close(fd);
-      rb_sys_fail(sGetCommState);
+      _rb_win32_fail(sGetCommState);
    }
    dcb.fBinary = TRUE;
    dcb.fParity = FALSE;
@@ -141,7 +150,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
    if (SetCommState(fh, &dcb) == 0)
    {
       close(fd);
-      rb_sys_fail(sSetCommState);
+      _rb_win32_fail(sSetCommState);
    }
 
    errno = 0;
@@ -181,7 +190,7 @@ VALUE RB_SERIAL_EXPORT sp_set_modem_params_impl(argc, argv, self)
    dcb.DCBlength = sizeof(dcb);
    if (GetCommState(fh, &dcb) == 0)
    {
-      rb_sys_fail(sGetCommState);
+      _rb_win32_fail(sGetCommState);
    }
 
    if (!use_hash)
@@ -285,7 +294,7 @@ VALUE RB_SERIAL_EXPORT sp_set_modem_params_impl(argc, argv, self)
 
    if (SetCommState(fh, &dcb) == 0)
    {
-      rb_sys_fail(sSetCommState);
+      _rb_win32_fail(sSetCommState);
    }
 
    return argv[0];
@@ -302,7 +311,7 @@ void RB_SERIAL_EXPORT get_modem_params_impl(self, mp)
    dcb.DCBlength = sizeof(dcb);
    if (GetCommState(fh, &dcb) == 0)
    {
-      rb_sys_fail(sGetCommState);
+      _rb_win32_fail(sGetCommState);
    }
 
    mp->data_rate = dcb.BaudRate;
@@ -324,7 +333,7 @@ VALUE RB_SERIAL_EXPORT sp_set_flow_control_impl(self, val)
    dcb.DCBlength = sizeof(dcb);
    if (GetCommState(fh, &dcb) == 0)
    {
-      rb_sys_fail(sGetCommState);
+      _rb_win32_fail(sGetCommState);
    }
 
    flowc = FIX2INT(val);
@@ -350,7 +359,7 @@ VALUE RB_SERIAL_EXPORT sp_set_flow_control_impl(self, val)
 
    if (SetCommState(fh, &dcb) == 0)
    {
-      rb_sys_fail(sSetCommState);
+      _rb_win32_fail(sSetCommState);
    }
 
    return val;
@@ -367,7 +376,7 @@ VALUE RB_SERIAL_EXPORT sp_get_flow_control_impl(self)
    dcb.DCBlength = sizeof(dcb);
    if (GetCommState(fh, &dcb) == 0)
    {
-      rb_sys_fail(sGetCommState);
+      _rb_win32_fail(sGetCommState);
    }
 
    ret = 0;
@@ -397,7 +406,7 @@ VALUE RB_SERIAL_EXPORT sp_set_read_timeout_impl(self, val)
    fh = get_handle_helper(self);
    if (GetCommTimeouts(fh, &ctout) == 0)
    {
-      rb_sys_fail(sGetCommTimeouts);
+      _rb_win32_fail(sGetCommTimeouts);
    }
 
    if (timeout < 0)
@@ -421,7 +430,7 @@ VALUE RB_SERIAL_EXPORT sp_set_read_timeout_impl(self, val)
 
    if (SetCommTimeouts(fh, &ctout) == 0)
    {
-      rb_sys_fail(sSetCommTimeouts);
+      _rb_win32_fail(sSetCommTimeouts);
    }
 
    return val;
@@ -436,7 +445,7 @@ VALUE RB_SERIAL_EXPORT sp_get_read_timeout_impl(self)
    fh = get_handle_helper(self);
    if (GetCommTimeouts(fh, &ctout) == 0)
    {
-      rb_sys_fail(sGetCommTimeouts);
+      _rb_win32_fail(sGetCommTimeouts);
    }
 
    switch (ctout.ReadTotalTimeoutConstant)
@@ -463,7 +472,7 @@ VALUE RB_SERIAL_EXPORT sp_set_write_timeout_impl(self, val)
    fh = get_handle_helper(self);
    if (GetCommTimeouts(fh, &ctout) == 0)
    {
-      rb_sys_fail(sGetCommTimeouts);
+      _rb_win32_fail(sGetCommTimeouts);
    }
 
    if (timeout <= 0)
@@ -479,7 +488,7 @@ VALUE RB_SERIAL_EXPORT sp_set_write_timeout_impl(self, val)
 
    if (SetCommTimeouts(fh, &ctout) == 0)
    {
-      rb_sys_fail(sSetCommTimeouts);
+      _rb_win32_fail(sSetCommTimeouts);
    }
 
    return val;
@@ -494,7 +503,7 @@ VALUE RB_SERIAL_EXPORT sp_get_write_timeout_impl(self)
    fh = get_handle_helper(self);
    if (GetCommTimeouts(fh, &ctout) == 0)
    {
-      rb_sys_fail(sGetCommTimeouts);
+      _rb_win32_fail(sGetCommTimeouts);
    }
 
    return INT2FIX(ctout.WriteTotalTimeoutMultiplier);
@@ -508,12 +517,12 @@ static void delay_ms(time)
    ev = CreateEvent(NULL, FALSE, FALSE, NULL);
    if (!ev)
    {
-      rb_sys_fail("CreateEvent");
+      _rb_win32_fail("CreateEvent");
    }
 
    if (WaitForSingleObject(ev, time) == WAIT_FAILED)
    {
-      rb_sys_fail("WaitForSingleObject");
+      _rb_win32_fail("WaitForSingleObject");
    }
 
    CloseHandle(ev);
@@ -529,7 +538,7 @@ VALUE RB_SERIAL_EXPORT sp_break_impl(self, time)
    fh = get_handle_helper(self);
    if (SetCommBreak(fh) == 0)
    {
-      rb_sys_fail("SetCommBreak");
+      _rb_win32_fail("SetCommBreak");
    }
 
    delay_ms(FIX2INT(time) * 100);
@@ -548,7 +557,7 @@ void RB_SERIAL_EXPORT get_line_signals_helper_impl(obj, ls)
    fh = get_handle_helper(obj);
    if (GetCommModemStatus(fh, &status) == 0)
    {
-      rb_sys_fail("GetCommModemStatus");
+      _rb_win32_fail("GetCommModemStatus");
    }
 
    ls->cts = (status & MS_CTS_ON ? 1 : 0);
@@ -583,7 +592,7 @@ static VALUE set_signal(obj, val, sigoff, sigon)
 
    if (EscapeCommFunction(fh, sig) == 0)
    {
-      rb_sys_fail("EscapeCommFunction");
+      _rb_win32_fail("EscapeCommFunction");
    }
 
    return val;
