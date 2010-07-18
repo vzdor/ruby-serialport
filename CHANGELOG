@@ -1,3 +1,7 @@
+1.0.4 => 07/17/2010:	[FIXED] [Windows] No longer restricted to specific bitrates
+						[FIXED] [Windows] Removed potentially insecure sprintf() use
+						[FIXED] [Windows] Workaround for rb_sys_fail not checking GetLastError()
+						
 1.0.3 => 04/08/2010:	[FIXED] [Windows] Could not specify 10 or "COM10" or higher 
 						[FIXED] [Windows] Warning passing INT instead of LONG to GetCommModemStatus
 
