@@ -95,11 +95,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
 
       case T_STRING:
          Check_SafeStr(_port);
-#ifdef HAVE_RUBY_IO_H
          str_port = RSTRING_PTR(_port);
-#else
-         str_port = RSTRING(_port)->ptr;
-#endif
 		 if (str_port[0] != '\\') /* Check for Win32 Device Namespace prefix "\\.\" */
 		 {
 			snprintf(port, sizeof(port) - 1, "\\\\.\\%s", str_port);
