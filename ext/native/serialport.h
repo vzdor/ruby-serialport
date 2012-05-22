@@ -59,7 +59,7 @@ struct line_signals
    #define ODD    ODDPARITY 
 
    #ifndef RB_SERIAL_EXPORT
-	 #ifndef RUBY_1_9
+	 #ifndef HAVE_RUBY_IO_H
      	#define RB_SERIAL_EXPORT __declspec(dllexport)
 	 #else
 		#define RB_SERIAL_EXPORT

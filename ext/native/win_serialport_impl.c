@@ -36,14 +36,14 @@ static char sSetCommTimeouts[] = "SetCommTimeouts";
 static HANDLE get_handle_helper(obj)
    VALUE obj;
 {
-#ifdef RUBY_1_9
+#ifdef HAVE_RUBY_IO_H
    rb_io_t *fptr;
 #else
    OpenFile *fptr;
 #endif
 
    GetOpenFile(obj, fptr);
-#ifdef RUBY_1_9
+#ifdef HAVE_RUBY_IO_H
    return (HANDLE) _get_osfhandle(fptr->fd);
 #else
    return (HANDLE) _get_osfhandle(fileno(fptr->f));
@@ -62,7 +62,7 @@ static void _rb_win32_fail(const char *function_call) {
 VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
    VALUE class, _port;
 {
-#ifdef RUBY_1_9
+#ifdef HAVE_RUBY_IO_H
    rb_io_t *fp;
 #else
    OpenFile *fp;
@@ -95,7 +95,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
 
       case T_STRING:
          Check_SafeStr(_port);
-#ifdef RUBY_1_9
+#ifdef HAVE_RUBY_IO_H
          str_port = RSTRING_PTR(_port);
 #else
          str_port = RSTRING(_port)->ptr;
@@ -155,7 +155,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
 
    errno = 0;
    fp->mode = FMODE_READWRITE | FMODE_BINMODE | FMODE_SYNC;
-#ifdef RUBY_1_9
+#ifdef HAVE_RUBY_IO_H
    fp->fd = fd;
 #else
    fp->f = fdopen(fd, "rb+");
