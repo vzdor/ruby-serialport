@@ -24,7 +24,7 @@
 #define RUBY_SERIAL_PORT_VERSION   "1.0.4"
 
 #include <ruby.h>    /* ruby inclusion */
-#ifdef RUBY_1_9      /* ruby io inclusion */
+#ifdef HAVE_RUBY_IO_H      /* ruby io inclusion */
    #include <ruby/io.h>
 #else
    #include <rubyio.h>
