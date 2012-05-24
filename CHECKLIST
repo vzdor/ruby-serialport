@@ -1,0 +1,11 @@
+# Ruby-Serialport Gem Pre-Push Checklist
+                
+* Update VERSION
+* Update #define RUBY_SERIAL_PORT_VERSION (serialport.h)
+* Update CHANGELOG
+* Update README if necessary
+* gem build serialport.gemspec
+* TEST
+* gem push serialport-*.*.*.gem
+* gem update serialport
+* TEST
