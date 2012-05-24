@@ -10,10 +10,6 @@ The native Windows version of this library supports Microsoft's Visual C++, Borl
 
 -- Installation --
 
-This gem is hosted at Gemcutter. Before you can install this, or any other Gemcutter gem you must
-add it as a gem source:
-  gem sources -a http://gemcutter.org
-
 Then you can install the gem as normal:
   sudo gem install serialport
 
@@ -30,7 +26,7 @@ Ruby's copy of miniterm.c !
 
     ** Class constants **
 
-       VERSION -> aString (this release is "0.6")
+       VERSION -> aString (EX: this release is "0.6")
        NONE, HARD, SOFT, SPACE, MARK, EVEN, ODD -> anInteger
 
     ** Class methods **
@@ -46,7 +42,7 @@ Ruby's copy of miniterm.c !
 
         Optional modem_parameters:
 
-        baudrate -> anInteger: from 50 to 256000, depends on platform.
+        baudrate -> anInteger: from 50 to 1000000, depends on platform.
 
         databits -> anInteger: from 5 to 8 (4 is allowed on Windows)
 
