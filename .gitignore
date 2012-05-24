@@ -8,3 +8,4 @@
 /ext/native/Makefile
 .*.swp
 tags
+*.gem
