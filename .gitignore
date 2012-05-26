@@ -1,6 +1,7 @@
 .DS_Store
 /pkg
 /doc
+/tmp
 /ext/native/*.bundle
 /ext/native/*.log
 /ext/native/*.o
@@ -9,3 +10,4 @@
 .*.swp
 tags
 *.gem
+*.bundle

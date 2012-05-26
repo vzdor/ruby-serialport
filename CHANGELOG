@@ -1,3 +1,6 @@
+1.1.0 => 05/14/2012:	[NEW] Ruby 2.0 Support [Aaron Patterson (tenderlove)] 
+                        [FIXED] Support for baud rates up to 1000000 in Windows [Will Koehler (willkoehler)]
+
 1.0.4 => 07/17/2010:	[FIXED] [Windows] No longer restricted to specific bitrates
 						[FIXED] [Windows] Removed potentially insecure sprintf() use
 						[FIXED] [Windows] Workaround for rb_sys_fail not checking GetLastError()
