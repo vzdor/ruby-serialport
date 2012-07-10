@@ -16,6 +16,10 @@ begin
     gemspec.has_rdoc = true
     gemspec.extensions << 'ext/native/extconf.rb'
 
+    gemspec.add_development_dependency "rake"
+    gemspec.add_development_dependency "rake-compiler", ">= 0.4.1"
+    gemspec.add_development_dependency "jeweler"
+
     Rake::ExtensionTask.new "serialport", gemspec do |ext|
       ext.lib_dir = File.join(*['lib', ENV['FAT_DIR']].compact)
       ext.ext_dir = "ext/native"
