@@ -1,3 +1,5 @@
+1.2.0 => 10/25/2013:	[NEW] rake-compiler, bundler, and travis ci integration
+
 1.1.0 => 05/14/2012:	[NEW] Ruby 2.0 Support [Aaron Patterson (tenderlove)] 
                         [FIXED] Support for baud rates up to 1000000 in Windows [Will Koehler (willkoehler)]
 
