@@ -1,13 +1,27 @@
+
+# :build
+# :install
+# :release
 require "bundler/gem_tasks"
+
+# :clean
+# :clobber
+# :compile
+# :compile:serialport
 require "rake/extensiontask"
 
-Rake::ExtensionTask.new "serialport" do |ext|
+CLOBBER << FileList["doc"]
+CLOBBER << FileList["pkg"]
+
+GEMSPEC = eval File.read File.expand_path("../serialport.gemspec", __FILE__)
+
+Rake::ExtensionTask.new "serialport", GEMSPEC do |ext|
   ext.lib_dir = File.join(*['lib', ENV['FAT_DIR']].compact)
   ext.ext_dir = "ext/native"
 end
 
-task :clean do
-  rm_rf(Dir['doc'], :verbose => true)
-  rm_rf(Dir['pkg'], :verbose => true)
+# add your default gem packing task
+Gem::PackageTask.new(GEMSPEC) do |pkg|
 end
 
+task :default => [:clean, :clobber, :compile, :test]

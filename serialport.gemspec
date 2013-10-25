@@ -9,22 +9,15 @@ Gem::Specification.new do |s|
   s.description = "Ruby/SerialPort is a Ruby library that provides a class for using RS-232 serial ports."
   s.email = "hector@hectorparra.com"
   s.homepage = "http://github.com/hparra/ruby-serialport/"
-  s.require_paths = ["lib"]
 
-  s.extensions = ["ext/native/extconf.rb", "ext/native/extconf.rb"]
-  s.files         = `git ls-files`.split($\)
-  s.extra_rdoc_files = [
-    "LICENSE",
-    "README"
-  ]
+  s.add_runtime_dependency "serialport"
+  s.add_development_dependency "bundler"
+  s.add_development_dependency "rake"
+  s.add_development_dependency "rake-compiler", ">= 0.4.1"
 
-  s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-
-  s.add_runtime_dependency(%q<serialport>, [">= 0"])
-  s.add_development_dependency(%q<rake>, [">= 0"])
-  s.add_development_dependency(%q<rake-compiler>, [">= 0.4.1"])
-  s.add_development_dependency(%q<rake>, [">= 0"])
-  s.add_development_dependency(%q<rake-compiler>, [">= 0.4.1"])
-  s.add_development_dependency(%q<jeweler>, [">= 0"])
+  s.require_paths     = ["lib"]
+  s.files             = `git ls-files`.split($\)
+  s.extensions        = "ext/native/extconf.rb"
+  s.executables       = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.extra_rdoc_files  = ["LICENSE", "README"]
 end
-
