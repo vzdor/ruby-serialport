@@ -10,7 +10,6 @@ Gem::Specification.new do |s|
   s.email = "hector@hectorparra.com"
   s.homepage = "http://github.com/hparra/ruby-serialport/"
 
-  s.add_runtime_dependency "serialport"
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
   s.add_development_dependency "rake-compiler", ">= 0.4.1"
