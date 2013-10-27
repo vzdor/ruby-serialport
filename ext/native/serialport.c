@@ -486,7 +486,4 @@ void Init_serialport()
    rb_define_const(cSerialPort, "MARK", INT2FIX(MARK));
    rb_define_const(cSerialPort, "EVEN", INT2FIX(EVEN));
    rb_define_const(cSerialPort, "ODD", INT2FIX(ODD));
-
-   /* the package's version as a string "X.Y.Z", beeing major, minor and patch level */
-   rb_define_const(cSerialPort, "VERSION", rb_str_new2(RUBY_SERIAL_PORT_VERSION));
 }

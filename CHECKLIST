@@ -1,6 +1,5 @@
 # Ruby-Serialport Gem Pre-Push Checklist
 
-* Update ext/native/serialport.h (#define RUBY_SERIAL_PORT_VERSION)
 * Update lib/serialport/version.rb
 * Update CHANGELOG
 * Update README
