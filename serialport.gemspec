@@ -3,6 +3,7 @@ require File.expand_path('../lib/serialport/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "serialport"
+  s.license = "GPL-2"
   s.version = SerialPort::VERSION
   s.authors = ["Guillaume Pierronnet", "Alan Stern", "Daniel E. Shipton", "Tobin Richard", "Hector Parra", "Ryan C. Payne"]
   s.summary = "Library for using RS-232 serial ports."
