@@ -1,3 +1,5 @@
+1.2.2 => 11/03/2013:	[FIXED] warning: already initialized constant VERSION
+
 1.2.1 => 10/25/2013:	[FIXED] removed absurd circular dependency
 
 1.2.0 => 10/25/2013:	[NEW] rake-compiler, bundler, and travis ci integration
