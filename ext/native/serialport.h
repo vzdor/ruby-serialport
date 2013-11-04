@@ -21,8 +21,6 @@
 #ifndef _RUBY_SERIAL_PORT_H_
 #define _RUBY_SERIAL_PORT_H_
 
-#define RUBY_SERIAL_PORT_VERSION   "1.2.1"
-
 #include <ruby.h>    /* ruby inclusion */
 #ifdef HAVE_RUBY_IO_H      /* ruby io inclusion */
    #include <ruby/io.h>
@@ -56,7 +54,7 @@ struct line_signals
    #define SPACE  SPACEPARITY
    #define MARK   MARKPARITY
    #define EVEN   EVENPARITY
-   #define ODD    ODDPARITY 
+   #define ODD    ODDPARITY
 
    #ifndef RB_SERIAL_EXPORT
 	 #ifndef HAVE_RUBY_IO_H
@@ -71,7 +69,7 @@ struct line_signals
    #define MARK   0
    #define EVEN   1
    #define ODD    2
-   
+
    #define RB_SERIAL_EXPORT
 #endif
 
