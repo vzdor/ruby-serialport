@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.files             = `git ls-files`.split($\)
   s.extensions        = "ext/native/extconf.rb"
   s.executables       = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  s.extra_rdoc_files  = ["LICENSE", "README"]
+  s.extra_rdoc_files  = ["LICENSE", "README.md"]
 end

@@ -1,9 +1,8 @@
 CHANGELOG
 MANIFEST
-README
+README.md
 Rakefile
 serialport.gemspec
-VERSION
 ext/native/extconf.rb
 ext/native/posix_serialport_impl.c
 ext/native/serialport.c
