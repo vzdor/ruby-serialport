@@ -12,3 +12,4 @@ tags
 *.gem
 *.bundle
 Gemfile.lock
+.yardoc
