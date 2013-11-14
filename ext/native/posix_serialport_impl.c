@@ -3,6 +3,7 @@
  * Alan Stern <stern@rowland.harvard.edu>
  * Daniel E. Shipton <dshipton@redshiptechnologies.com>
  * Ryan C. Payne <rpayne-oss@bullittsystems.com>
+ * Manuel "MaG" A. Güílamo <maguilamo.c@gmail.com>
  *
  * This code is hereby licensed for public consumption under either the
  * GNU GPL v2 or greater.
@@ -729,5 +730,54 @@ VALUE sp_get_dtr_impl(self)
 
    return INT2FIX(ls.dtr);
 }
+
+VALUE sp_flush_input_data_impl(self)
+VALUE self;
+{
+	int fd;
+	int ret;
+
+	fd = get_fd_helper(self);
+
+	ret = tcflush(fd, TCIFLUSH);
+	if(ret<0) {
+		rb_sys_fail("tcflush");
+	}
+
+	return Qtrue;
+}
+
+VALUE sp_flush_output_data_impl(self)
+VALUE self;
+{
+	int fd;
+	int ret;
+
+	fd = get_fd_helper(self);
+
+	ret = tcflush(fd, TCOFLUSH);
+	if(ret<0) {
+		rb_sys_fail("tcflush");
+	}
+
+	return Qtrue;
+}
+
+VALUE sp_flush_all_data_impl(self)
+VALUE self;
+{
+	int fd;
+	int ret;
+
+	fd = get_fd_helper(self);
+
+	ret = tcflush(fd, TCIOFLUSH);
+	if(ret<0) {
+		rb_sys_fail("tcflush");
+	}
+
+	return Qtrue;
+}
+
 
 #endif /* !defined(OS_MSWIN) && !defined(OS_BCCWIN) && !defined(OS_MINGW) */

@@ -620,4 +620,29 @@ VALUE RB_SERIAL_EXPORT sp_get_dtr_impl(self)
    return self;
 }
 
+VALUE
+sp_flush_input_data_impl(self)
+VALUE self;
+{
+	rb_noimplement();
+	return self;
+}
+
+VALUE
+sp_flush_output_data_impl(self)
+VALUE self;
+{
+	rb_noimplement();
+	return self;
+}
+
+VALUE
+sp_flush_all_data_impl(self)
+VALUE self;
+{
+	rb_noimplement();
+	return self;
+}
+
+
 #endif /* defined(OS_MSWIN) || defined(OS_BCCWIN) || defined(OS_MINGW) */
