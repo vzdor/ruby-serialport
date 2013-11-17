@@ -96,6 +96,5 @@ VALUE RB_SERIAL_EXPORT sp_get_dtr_impl(VALUE self);
 
 VALUE RB_SERIAL_EXPORT sp_flush_input_data_impl(VALUE self);
 VALUE RB_SERIAL_EXPORT sp_flush_output_data_impl(VALUE self);
-VALUE RB_SERIAL_EXPORT sp_flush_all_data_impl(VALUE self);
 
 #endif

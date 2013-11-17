@@ -741,7 +741,7 @@ VALUE self;
 
 	ret = tcflush(fd, TCIFLUSH);
 	if(ret<0) {
-		rb_sys_fail("tcflush");
+		return Qfalse;
 	}
 
 	return Qtrue;
@@ -757,27 +757,12 @@ VALUE self;
 
 	ret = tcflush(fd, TCOFLUSH);
 	if(ret<0) {
-		rb_sys_fail("tcflush");
+		return Qfalse;
 	}
 
 	return Qtrue;
 }
 
-VALUE sp_flush_all_data_impl(self)
-VALUE self;
-{
-	int fd;
-	int ret;
-
-	fd = get_fd_helper(self);
-
-	ret = tcflush(fd, TCIOFLUSH);
-	if(ret<0) {
-		rb_sys_fail("tcflush");
-	}
-
-	return Qtrue;
-}
 
 
 #endif /* !defined(OS_MSWIN) && !defined(OS_BCCWIN) && !defined(OS_MINGW) */

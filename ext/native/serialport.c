@@ -492,10 +492,7 @@ static VALUE sp_signals(self)
 /**
  * Flush data received but not read.
  *
- * @return [Boolean] true on success otherwise an error occurs. It causes all
- * errors the tcflush(3) system call causes. The caller should care such
- * errors.
- * @note (Windows) flush_input is not available
+ * @return [Boolean] true on success or false if an error occurs.
  */
 static VALUE sp_flush_input_data(self)
    VALUE self;
@@ -506,29 +503,12 @@ static VALUE sp_flush_input_data(self)
 /**
  * Flush data written but not transmitted.
  *
- * @return [Boolean] true on success otherwise an error occurs. It causes all
- * errors the tcflush(3) system call causes. The caller should care such
- * errors.
- * @note (Windows) flush_output is not available
+ * @return [Boolean] true on success or false if an error occurs.
  */
 static VALUE sp_flush_output_data(self)
    VALUE self;
 {
    return sp_flush_output_data_impl(self);
-}
-
-/**
- * Flush both data received but not read and data written but not transmitted.
- *
- * @return [Boolean] true on success otherwise an error occurs. It causes all
- * errors the tcflush(3) system call causes. The caller should care such
- * errors.
- * @note (Windows) flush is not available
- */
-static VALUE sp_flush_all_data(self)
-   VALUE self;
-{
-   return sp_flush_all_data_impl(self);
 }
 
 
@@ -595,7 +575,6 @@ void Init_serialport()
 
    rb_define_method(cSerialPort, "flush_input", sp_flush_input_data, 0);
    rb_define_method(cSerialPort, "flush_output", sp_flush_output_data, 0);
-   rb_define_method(cSerialPort, "flush", sp_flush_all_data, 0);
 
    /*
     * 0

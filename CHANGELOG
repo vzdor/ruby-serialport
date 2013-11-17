@@ -1,3 +1,5 @@
+1.2.4 => 11/17/2013:    [NEW] flush_input() and flush_output() methods [Manuel A. Güílamo (MaG)]
+
 1.2.3 => 11/04/2013:	[FIXED] Improved documentation (yard)
 
 1.2.2 => 11/03/2013:	[FIXED] warning: already initialized constant VERSION
