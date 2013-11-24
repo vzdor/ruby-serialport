@@ -620,4 +620,40 @@ VALUE RB_SERIAL_EXPORT sp_get_dtr_impl(self)
    return self;
 }
 
+#define PURGE_RXABORT 0x02
+#define PURGE_RXCLEAR 0x08
+VALUE RB_SERIAL_EXPORT sp_flush_input_data_impl(self)
+	VALUE self;
+{
+	BOOL   ret;
+	HANDLE fh;
+
+	fh = get_handle_helper(self);
+
+	ret = PurgeComm(fh, (DWORD)(PURGE_RXCLEAR | PURGE_RXABORT));
+	if(!ret) {
+		return Qfalse;
+	}
+	return Qtrue;
+}
+
+#define PURGE_TXABORT 0x01
+#define PURGE_TXCLEAR 0x04
+VALUE RB_SERIAL_EXPORT sp_flush_output_data_impl(self)
+	VALUE self;
+{
+	BOOL   ret;
+	HANDLE fh;
+
+	fh = get_handle_helper(self);
+
+	ret = PurgeComm(fh, (DWORD)(PURGE_TXCLEAR | PURGE_TXABORT));
+	if(!ret) {
+		return Qfalse;
+	}
+	return Qtrue;
+}
+
+
+
 #endif /* defined(OS_MSWIN) || defined(OS_BCCWIN) || defined(OS_MINGW) */

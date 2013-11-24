@@ -489,6 +489,29 @@ static VALUE sp_signals(self)
    return hash;
 }
 
+/**
+ * Flush data received but not read.
+ *
+ * @return [Boolean] true on success or false if an error occurs.
+ */
+static VALUE sp_flush_input_data(self)
+   VALUE self;
+{
+   return sp_flush_input_data_impl(self);
+}
+
+/**
+ * Flush data written but not transmitted.
+ *
+ * @return [Boolean] true on success or false if an error occurs.
+ */
+static VALUE sp_flush_output_data(self)
+   VALUE self;
+{
+   return sp_flush_output_data_impl(self);
+}
+
+
 void Init_serialport()
 {
    sBaud = rb_str_new2("baud");
@@ -549,6 +572,9 @@ void Init_serialport()
    rb_define_method(cSerialPort, "dsr", sp_get_dsr, 0);
    rb_define_method(cSerialPort, "dcd", sp_get_dcd, 0);
    rb_define_method(cSerialPort, "ri", sp_get_ri, 0);
+
+   rb_define_method(cSerialPort, "flush_input", sp_flush_input_data, 0);
+   rb_define_method(cSerialPort, "flush_output", sp_flush_output_data, 0);
 
    /*
     * 0
