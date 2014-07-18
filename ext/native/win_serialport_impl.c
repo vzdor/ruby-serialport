@@ -94,8 +94,7 @@ VALUE RB_SERIAL_EXPORT sp_create_impl(class, _port)
          break;
 
       case T_STRING:
-         Check_SafeStr(_port);
-         str_port = RSTRING_PTR(_port);
+         str_port = StringValueCStr(_port);
 		 if (str_port[0] != '\\') /* Check for Win32 Device Namespace prefix "\\.\" */
 		 {
 			snprintf(port, sizeof(port) - 1, "\\\\.\\%s", str_port);

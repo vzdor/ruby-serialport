@@ -126,8 +126,7 @@ VALUE sp_create_impl(class, _port)
          break;
 
       case T_STRING:
-         Check_SafeStr(_port);
-         port = RSTRING_PTR(_port);
+         port = StringValueCStr(_port);
          break;
 
       default:
