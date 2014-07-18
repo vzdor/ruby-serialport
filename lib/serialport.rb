@@ -36,7 +36,7 @@ class SerialPort
    # to which the new serial port object will be passed. In this case
    # the connection is automaticaly closed when the block has finished.
    #
-   # @yield [SerialPort] the serial port number or filename
+   # @yield [serial_port] the serial port number or filename
    # @see SerialPort#new
    # @see SerialPort#set_modem_params
    def SerialPort::open(port, *params)
