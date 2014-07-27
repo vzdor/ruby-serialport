@@ -8,6 +8,8 @@ Ruby/SerialPort is a Ruby library that provides a class for using RS-232 serial 
 
 The native Windows version of this library supports the Microsoft Visual C++, Borland C++, and MinGW compilers.
 
+There is an alternative gem with MRI, JRuby, and Rubinius support. See below.
+
 ## Installation
 
 Install the gem as normal: `sudo gem install serialport`
@@ -23,6 +25,10 @@ See <http://rubydoc.info/gems/serialport/SerialPort> or run `yard`
 ## Issues
 
 See <https://github.com/hparra/ruby-serialport/issues>
+
+## Alternatives
+
+The [Hybrid Group](http://hybridgroup.com/)'s MRI, JRuby, & Rubinius compatible [rubyserial](https://github.com/hybridgroup/rubyserial) gem may provide improved compatibilty in modern environments.
 
 ## License
 
